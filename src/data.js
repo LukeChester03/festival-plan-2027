@@ -1,0 +1,61 @@
+// Researched 7 October 2026. Sources listed in the footer.
+export const tiers = {
+  good:   { title: "Good shot", note: "Community, town and smaller rock festivals that book emerging acts through an open form." },
+  worth:  { title: "Worth a shot", note: "Open to anyone, but more competitive or harder to read. Apply anyway." },
+  long:   { title: "Long shot", note: "Mostly booked through agents. Free to try, but don't count on these." },
+  closed: { title: "Closed for 2027", note: "Missed this year. Put them in the diary for 2028." }
+};
+
+export const fests = [
+  { t:"good", n:"DonnyFest", where:"Doncaster", when:"5 Jun", size:"Free day festival, plays to thousands", pay:"Not stated", asks:"Spotify profile, a live video if you have one, social links and a short bio", dl:"31 Oct 2026", hot:true,
+    read:"Built for emerging and local acts, with a lean towards Yorkshire. They only ask for Spotify and a live clip, so you can apply as you are.", url:"https://donnyfest.co.uk/apply-to-play/" },
+  { t:"good", n:"Home Farm Festival", where:"Chilthorne Domer, Somerset", when:"11–13 Jun", size:"Small boutique festival", pay:"Not stated", asks:"FestivalPro application form", dl:"Opens 9 Oct, closes 6 Nov 2026 (4pm)", hot:true,
+    read:"The window is four weeks and they say it may close early if they get too many applications. Apply on the day it opens.", url:"https://homefarmfest.festivalpro.com/form/RvLOFXUHrvfJCIAwLbMM/0" },
+  { t:"good", n:"Teddy Rocks", where:"Blandford, Dorset", when:"30 Apr–2 May", size:"Mid-size rock charity festival", pay:"Not disclosed", asks:"One music link (SoundCloud, Bandcamp or YouTube), up to 3 genres and a pitch of up to 280 characters", dl:"Rolling; reviewed close to the festival",
+    read:"A rock-first lineup and a short form. Put your effort into the 280-character pitch. It's in spring, so it works as a warm-up for summer.", url:"https://teddyrocks.co.uk/play" },
+  { t:"good", n:"Loopfest", where:"Shrewsbury", when:"28 Apr–2 May", size:"Multi-venue town festival", pay:"Not stated", asks:"Online form; asks whether any member is under 18", dl:"Not published",
+    read:"Every venue has a PA, a sound tech, amps and a basic three-piece kit, so it costs very little to play. Good live practice before summer.", url:"https://loopfest.co.uk/info/perform/" },
+  { t:"good", n:"Dart Music Festival", where:"Dartmouth, Devon", when:"14–16 May", size:"Multi-venue town festival", pay:"Negotiated fee you propose; no travel or accommodation", asks:"Music links (live recordings encouraged), public liability insurance, PRS details, proposed fee, available all 3 days", dl:"No closing date",
+    read:"One of the few that pays. Price in your fuel. No backline is provided, and only two venues have a drum kit.", url:"https://www.dartmusicfestival.co.uk/artists-applications/" },
+  { t:"good", n:"Twyfest", where:"Twyford, Berkshire", when:"19 Jun", size:"Free community day festival", pay:"Unpaid (stage, sound, lights and some drinks)", asks:"A link to your music and a few words about you, emailed to bands@twyfest.uk", dl:"Rolling; still booking",
+    read:"The easiest yes on this list if Berkshire is within reach. Local acts get priority.", url:"https://twyfest.uk/" },
+  { t:"good", n:"Wokingham Festival", where:"Wokingham, Berkshire", when:"Aug bank holiday", size:"Two stages: main stage and marquee", pay:"Not stated", asks:"Artist enquiry form", dl:"Rolling",
+    read:"Books emerging local acts alongside established ones. They don't reply to everyone.", url:"https://www.wokinghamfestival.co.uk/artist-enquiry" },
+
+  { t:"worth", n:"Dot to Dot", where:"Bristol and Nottingham", when:"29–30 May", size:"Multi-venue city festival", pay:"Not stated", asks:"Google Form linked from their information page", dl:"Not published",
+    read:"The best genre fit on the list: it's an indie and alt festival. Most acts on the bill have a team behind them, but anyone can use the form.", url:"https://www.dottodotfestival.co.uk/" },
+  { t:"worth", n:"Camper Calling", where:"Ragley Hall, Warwickshire", when:"27–29 Aug", size:"Mid-size family festival", pay:"Not stated", asks:"Apply-to-play form", dl:"Not published",
+    read:"The Freshly Squeezed stage is for BBC Introducing acts, so upload to BBC Introducing before you apply.", url:"https://www.campercalling.com/apply-to-play" },
+  { t:"worth", n:"Sunshine Festival", where:"Upton upon Severn", when:"26–29 Aug", size:"Mid-size bank holiday festival", pay:"Not stated", asks:"Links to performances (required), genre and experience, and which days Thu–Sun you're free", dl:"Rolling",
+    read:"Open to anyone, but thousands apply and they won't consider entries without links to live performances. Send a live video, not just Spotify.", url:"https://www.uptonfestival.co.uk/artist-act-submission/" },
+  { t:"worth", n:"Together Again", where:"Bolesworth Castle, Cheshire", when:"23–25 Jul", size:"Mid-size", pay:"Not stated", asks:"Apply-to-play form", dl:"Not published",
+    read:"Run by Escape Records. The form is live, but the page says very little about who they book.", url:"https://togetheragainfestival.co.uk/apply-to-play/" },
+  { t:"worth", n:"FOCUS Wales", where:"Wrexham", when:"6–8 May", size:"Showcase: 250+ artists, 20 stages, music industry attending", pay:"Not stated", asks:"Free Amplead application or Google Form; no covers or tribute acts; 30-minute sets", dl:"1 Nov 2026 (6pm)", hot:true,
+    read:"A showcase that music industry people attend. Welsh acts come first, but UK and international acts play every year.", url:"https://www.amplead.com/apply-to-play/focus27" },
+  { t:"worth", n:"Meadow Fest", where:"Buckinghamshire", when:"28–30 May", size:"Small", pay:"Not stated", asks:"Via their website", dl:"Not published",
+    read:"Listed as open by ICMP. There's little detail, so it costs you nothing but a message.", url:"https://www.meadow-fest.com/" },
+
+  { t:"long", n:"The Great Escape", where:"Brighton", when:"12–15 May", size:"About 500 emerging artists across 30+ venues", pay:"Not stated", asks:"Free application through CD Baby", dl:"15 Feb 2027 (23:59)",
+    read:"The biggest new-music showcase in the UK. Most slots go to acts with a label, agent or PR. It's free, so apply. No reply by 31 March means no.", url:"https://greatescapefestival.com/apply-to-play/" },
+  { t:"long", n:"Glastonbury Emerging Talent Competition", where:"Pilton, Somerset", when:"Glastonbury 2027", size:"Thousands enter, 90 make the longlist, 8 the final", pay:"£5,000 PRS Foundation prize for the winner", asks:"Last time: one original song plus a video of you playing live", dl:"Expected spring 2027",
+    read:"Free to enter, and the live video you make now covers it. The winner plays a main stage.", url:"https://glastonburyfestivals.co.uk/" },
+  { t:"long", n:"2000trees", where:"Cheltenham", when:"7–10 Jul", size:"Mid-size rock festival", pay:"Not stated", asks:"Contact page only", dl:"—",
+    read:"The right scene for you, but the bill is booked through agents. A short, polite email with your live video is the most you can do.", url:"https://2000trees.co.uk/contact" },
+  { t:"long", n:"Y Not?", where:"Derbyshire", when:"29 Jul–1 Aug", size:"Large, tens of thousands", pay:"Not stated", asks:"Applications open nearer the festival", dl:"Opens later",
+    read:"Sign up to their newsletter so you hear when the form opens.", url:"https://ynotfestival.com/contact/" },
+  { t:"long", n:"Kendal Calling", where:"Lake District", when:"29 Jul–1 Aug", size:"Large, tens of thousands", pay:"Not stated", asks:"Contact page only", dl:"—",
+    read:"Indie-heavy bill, but booked through agents.", url:"https://kendalcalling.co.uk/information/contact" },
+  { t:"long", n:"Victorious", where:"Portsmouth", when:"27–29 Aug", size:"Large, tens of thousands", pay:"Not stated", asks:"Contact page only", dl:"—",
+    read:"Local stages sometimes feature Portsmouth-area bands. Only worth it if you're from the south coast.", url:"https://www.victoriousfestival.co.uk/info-category/contacts/" },
+  { t:"long", n:"Green Man", where:"Bannau Brycheiniog, Wales", when:"19–22 Aug", size:"Large", pay:"Not stated", asks:"Contact page only", dl:"—",
+    read:"Booked through agents. Its Green Man Rising competition is the usual way in for new bands; watch for it opening.", url:"https://www.greenman.net/information/contact-us/" },
+  { t:"long", n:"Camp Bestival", where:"Lulworth, Dorset", when:"29 Jul–1 Aug", size:"Large family festival", pay:"Not stated", asks:"Contact page only", dl:"—",
+    read:"Family bill and booked through agents. Low fit.", url:"https://dorset.campbestival.net/info/contact-us/" },
+  { t:"long", n:"ArcTanGent", where:"Bristol", when:"18–21 Aug", size:"Mid-size", pay:"Not stated", asks:"No public band form", dl:"—",
+    read:"Only a fit if your sound leans math or post-rock.", url:"https://arctangent.co.uk/" },
+
+  { t:"closed", n:"Boomtown", where:"Hampshire", when:"11–15 Aug", size:"Large, tens of thousands", pay:"—", asks:"Artist applications 2027", dl:"Closed 10 Feb 2026",
+    read:"Their 2027 window closed in February 2026, over a year early. For 2028, look for it in January 2027.", url:"https://boomtownmusic.festivalpro.com/form/iyVuermAimIgtjfqlyet/0" },
+  { t:"closed", n:"Tewkesbury Live", where:"Tewkesbury", when:"23–25 Jul", size:"20+ venues across the town", pay:"Venues cover much of the band costs", asks:"—", dl:"Closed; results by end of Feb 2027",
+    read:"A good fit for next year: rock, pop, punk, and the venues help with costs. Ask events@tewkesburytowncouncil.gov.uk when the 2028 window opens.", url:"https://tewkesburylive.co.uk/" }
+];
