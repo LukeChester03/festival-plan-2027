@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
 const sources = [
+  ["https://crockpotcartel.notion.site/Music-Festivals-3e271f9659ed8074ba36d0aaedeeaf8f", "Crock Pot Cartel: Festivals that actually book independent artists"],
   ["https://www.icmp.ac.uk/blog/apply-play-a-music-festival", "ICMP: Apply to play a music festival in 2027"],
   ["https://theplayground.co.uk/10-festivals-accepting-artist-submissions-for-2027/", "The Playground: 10 festivals accepting submissions for 2027"],
   ["https://routenote.com/radar/music-festivals-accepting-artist-applications-for-2027/", "RouteNote: Festivals accepting applications for 2027"],

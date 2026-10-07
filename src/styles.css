@@ -284,6 +284,29 @@ button { font: inherit; color: inherit; }
 .cursor-closed { background: #bbb; color: var(--black); }
 @media (hover: none) { .cursor-sticker { display: none; } }
 
+/* ---------- Red flags ---------- */
+.flags { padding: clamp(80px, 12vw, 140px) 0; background: var(--black); }
+.flags .display { color: var(--paper); }
+.golden-rule {
+  max-width: 34em; margin: 0 0 48px; padding: 22px 26px; border-radius: 14px;
+  background: var(--volt); color: var(--black); font-size: clamp(1.1rem, 1.8vw, 1.35rem); font-weight: 600; line-height: 1.4;
+}
+.flag-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 196px), 1fr)); gap: 20px; }
+.flag { perspective: 1000px; }
+.flag-btn { display: block; width: 100%; height: 100%; min-height: 230px; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; }
+.flag-inner { position: relative; display: block; width: 100%; height: 100%; min-height: 230px; transform-style: preserve-3d; }
+.flag-face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px; padding: 22px;
+  border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.flag-front { background: var(--red); color: var(--paper); }
+.flag-back { background: var(--paper); color: var(--black); transform: rotateY(180deg); justify-content: center; }
+.flag-icon { width: 30px; height: 30px; fill: var(--volt); }
+.flag-front .flag-text { font-family: var(--display); font-variation-settings: "wght" 800, "wdth" 75; text-transform: uppercase; font-size: 1.7rem; line-height: .95; }
+.flag-back .flag-text { font-size: 1.0625rem; font-weight: 500; }
+.flag-hint { margin-top: auto; font-size: .875rem; font-weight: 600; opacity: .85; }
+.flag-btn:hover .flag-front { box-shadow: 0 0 0 3px var(--volt); }
+
 /* ---------- Rider ---------- */
 .rider { padding: clamp(80px, 12vw, 140px) 0; background: var(--ox); }
 .rider .display { color: var(--paper); }
