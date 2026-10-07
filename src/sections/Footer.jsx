@@ -21,6 +21,16 @@ const sources = [
   ["https://ynotfestival.com/contact/", "Y Not? Festival: Contact"],
   ["https://routenote.com/blog/glastonbury-2027-tickets-price-sale-dates-and-what-artists-need-to-know/", "RouteNote: Glastonbury 2027 for artists"],
   ["https://livemusicexchange.org/blog/hidden-revenues-in-playing-unsigned-stages-on-the-festival-circuit-repost-matt-brennan/", "Live Music Exchange: Unsigned stages on the festival circuit"],
+  ["https://tramlines.org.uk/explore/apply-to-play/", "Tramlines: Apply to Play"],
+  ["https://www.victoriousfestival.co.uk/2025/11/apply-to-play-is-open/", "Victorious: Apply to Play"],
+  ["https://deershedfestival.com/emi.aspx", "Deer Shed: Apply to Play with EMI North"],
+  ["https://truckfestival.com/truck-in-the-community/promotion-of-the-arts/", "Truck Festival: Band App"],
+  ["https://wychwoodfestival.com/information/get-involved", "Wychwood: Get involved"],
+  ["https://musicbarn.co.uk/get-involved/", "Music Barn: Get involved"],
+  ["https://www.exeter-respect.org/contribute/", "Exeter Respect: Contribute"],
+  ["https://eskfest.com/contact-us", "Eskfest: Contact"],
+  ["https://www.widedays.com/showcases", "Wide Days: Showcases"],
+  ["https://theplayground.co.uk/?p=51972", "The Playground: 2026 UK festival open calls"],
 ];
 
 export default function Footer() {

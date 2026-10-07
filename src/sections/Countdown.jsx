@@ -7,6 +7,7 @@ const deadlines = [
   { id: "donny", name: "DonnyFest", verb: "Closes", at: "2026-10-31T23:59:00+00:00", when: "31 Oct", note: "They ask for a Spotify profile and a live clip.", tier: "good" },
   { id: "focus", name: "FOCUS Wales", verb: "Closes", at: "2026-11-01T18:00:00+00:00", when: "1 Nov, 6pm", note: "Free to apply through Amplead. Showcase sets are 30 minutes.", tier: "worth" },
   { id: "hf-close", name: "Home Farm Festival", verb: "Closes", at: "2026-11-06T16:00:00+00:00", when: "6 Nov, 4pm", note: "Or sooner if they hit their limit.", tier: "good" },
+  { id: "esk", name: "Eskfest", verb: "Closes", at: "2027-02-01T23:59:00+00:00", when: "1 Feb", note: "Email your application. Lake District, 8–10 July.", tier: "good" },
   { id: "tge", name: "The Great Escape", verb: "Closes", at: "2027-02-15T23:59:00+00:00", when: "15 Feb", note: "No reply by 31 March 2027 means you weren't picked.", tier: "long" },
 ];
 
@@ -84,7 +85,7 @@ export default function Countdown() {
           {deadlines.map((d, i) => <Pass key={d.id} d={d} i={i} now={now} />)}
         </ol>
         <p className="rolling">
-          <b>No published deadline:</b> Teddy Rocks, Loopfest, Dart, Twyfest, Wokingham, Sunshine, Dot to Dot, Camper Calling and Together Again. Most summer festivals finish booking between January and March, so apply before Christmas. Glastonbury's Emerging Talent Competition is expected to open in spring 2027, and Y Not? says its applications open nearer the festival.
+          <b>No published deadline:</b> Teddy Rocks, Loopfest, Dart, Twyfest, Wokingham, Music Barn, Exeter Respect, the Cornish festivals, Sunshine, Dot to Dot, Camper Calling and Together Again. Most summer festivals finish booking between January and March, so apply before Christmas. Still to open: Tramlines Apply to Play (last year's closed 28 January), Victorious Apply to Play (ran November to March), Wychwood, Truck's Band App, End of the Road, and Deer Shed (closed 2 April last year). Glastonbury's Emerging Talent Competition is expected in spring 2027, and Y Not? says its applications open nearer the festival.
         </p>
       </div>
     </section>
