@@ -26,7 +26,7 @@
   --torn: polygon(0 0, 100% 0, 100% 97%, 96% 99.4%, 92% 97.6%, 87% 99.8%, 82% 97.2%, 77% 99%, 71% 97.8%, 66% 100%, 60% 97.4%, 55% 99.3%, 49% 97.7%, 44% 99.8%, 38% 97.3%, 33% 99.1%, 27% 97.6%, 21% 99.9%, 15% 97.5%, 10% 99.2%, 5% 97.8%, 0 99.5%);
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0;
   background-color: var(--wall);
@@ -38,7 +38,7 @@ body {
   font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.55;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 /* Photocopy grain over everything */
 body::after {
@@ -73,9 +73,7 @@ a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; 
   transform: rotate(-.8deg);
   clip-path: var(--torn);
   padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 60px) clamp(44px, 6vw, 72px);
-  animation: slap .55s cubic-bezier(.2,.9,.25,1.15) both .1s;
 }
-@keyframes slap { from { opacity: 0; transform: rotate(-4deg) scale(1.06); } }
 .hero .tape.t1 { top: clamp(20px, 6vw, 64px); left: 6%; transform: rotate(-6deg); }
 .hero .tape.t2 { top: clamp(16px, 6vw, 60px); right: 8%; transform: rotate(5deg); }
 
@@ -130,6 +128,10 @@ a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; 
   font-weight: 800; font-size: .8125rem; padding: 5px 10px; border: 2px solid var(--ink); white-space: nowrap;
 }
 .badge.good { background: var(--pink); }
+.dates mark.hl {
+  color: inherit; padding: 0 .08em;
+  background: linear-gradient(var(--pink), var(--pink)) no-repeat 0 70% / 100% 38%;
+}
 .badge.worth { background: var(--paper); }
 .dates li.closed .f { text-decoration: line-through; text-decoration-thickness: 5px; color: #6c6a64; }
 .stamp {
@@ -166,17 +168,20 @@ section { padding: clamp(40px, 7vw, 80px) 0; }
 
 /* ---------- Deadlines: ticket stubs ---------- */
 .tickets { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 22px; list-style: none; margin: 0; padding: 0; }
-.ticket {
-  position: relative;
-  background-color: var(--paper-2);
-  background-image: var(--grain);
-  color: var(--ink);
-  padding: 18px 20px 18px 34px;
-  -webkit-mask: radial-gradient(circle 11px at 0 50%, transparent 98%, #000) , radial-gradient(circle 11px at 100% 50%, transparent 98%, #000);
-  -webkit-mask-composite: source-in; mask-composite: intersect;
+.ticket { position: relative; display: flex; color: var(--ink); }
+.ticket .stub, .ticket .tbody { background-color: var(--paper-2); background-image: var(--grain); }
+.ticket.hot .stub, .ticket.hot .tbody { background-color: var(--tape); }
+.ticket .stub {
+  flex: none; width: 26px; border-right: 2px dashed rgba(0,0,0,.35);
+  transform-origin: 100% 0;
+  -webkit-mask: radial-gradient(circle 10px at 100% 50%, transparent 98%, #000);
+          mask: radial-gradient(circle 10px at 100% 50%, transparent 98%, #000);
 }
-.ticket::before { content: ""; position: absolute; left: 18px; top: 10px; bottom: 10px; border-left: 2px dashed rgba(0,0,0,.35); }
-.ticket.hot { background-color: var(--tape); }
+.ticket .tbody {
+  flex: 1; padding: 18px 20px 18px 16px;
+  -webkit-mask: radial-gradient(circle 10px at 0 50%, transparent 98%, #000);
+          mask: radial-gradient(circle 10px at 0 50%, transparent 98%, #000);
+}
 .ticket:nth-child(odd) { transform: rotate(-1deg); }
 .ticket:nth-child(even) { transform: rotate(.8deg); }
 .ticket time { display: block; font-family: var(--stencil); font-weight: 900; font-size: 2.1rem; line-height: 1; text-transform: uppercase; }
@@ -252,7 +257,7 @@ section { padding: clamp(40px, 7vw, 80px) 0; }
 .check { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 0 44px; }
 .check li { padding: 14px 0 14px 42px; position: relative; border-bottom: 2px solid var(--ink); }
 .check li::before { content: ""; position: absolute; left: 2px; top: 16px; width: 22px; height: 22px; border: 3px solid var(--ink); }
-.check li::after { content: "✓"; position: absolute; left: 4px; top: 4px; font-family: var(--marker); font-size: 1.9rem; color: var(--pink); transform: rotate(-8deg); }
+.check li::after { content: "✓"; position: absolute; left: 4px; top: 4px; font-family: var(--marker); font-size: 1.9rem; color: var(--pink); transform: rotate(-8deg) scale(var(--tick, 1)); transform-origin: 40% 70%; }
 .check b { font-weight: 800; }
 
 footer { padding: 30px 0 70px; color: #A8A49B; font-size: .875rem; }
@@ -269,10 +274,13 @@ footer li { margin-bottom: 4px; break-inside: avoid; }
   .fest .where, .fest .dl { grid-column: 1; }
   .fest .plus { grid-row: 1; grid-column: 2; }
 }
+.js-anim .poster, .js-anim .sticker, .js-anim .hero .tape { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) {
+  .js-anim .poster, .js-anim .sticker, .js-anim .hero .tape { visibility: visible; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
+<script>document.documentElement.classList.add("js-anim");setTimeout(()=>{if(!window.gsap)document.documentElement.classList.remove("js-anim")},3000);</script>
 </head>
 <body>
 <main class="wrap">
@@ -291,11 +299,11 @@ footer li { margin-bottom: 4px; break-inside: avoid; }
           <p>In deadline order</p>
         </div>
         <ol>
-          <li><span class="d">31 Oct</span><span class="f">DonnyFest<small>Doncaster, 5 Jun 2027</small></span><span class="badge good">Good odds</span></li>
-          <li><span class="d">6 Nov</span><span class="f">Home Farm<small>Somerset, 11–13 Jun. Opens 9 Oct, 4pm</small></span><span class="badge good">Good odds</span></li>
-          <li><span class="d">Rolling</span><span class="f">Teddy Rocks<small>Dorset, 30 Apr–2 May</small></span><span class="badge good">Good odds</span></li>
-          <li><span class="d">Rolling</span><span class="f">Loopfest<small>Shrewsbury, 28 Apr–2 May</small></span><span class="badge good">Good odds</span></li>
-          <li><span class="d">Rolling</span><span class="f">Dart Music<small>Dartmouth, 14–16 May. Pays a fee</small></span><span class="badge good">Good odds</span></li>
+          <li><span class="d">31 Oct</span><span class="f"><mark class="hl">DonnyFest</mark><small>Doncaster, 5 Jun 2027</small></span><span class="badge good">Good odds</span></li>
+          <li><span class="d">6 Nov</span><span class="f"><mark class="hl">Home Farm</mark><small>Somerset, 11–13 Jun. Opens 9 Oct, 4pm</small></span><span class="badge good">Good odds</span></li>
+          <li><span class="d">Rolling</span><span class="f"><mark class="hl">Teddy Rocks</mark><small>Dorset, 30 Apr–2 May</small></span><span class="badge good">Good odds</span></li>
+          <li><span class="d">Rolling</span><span class="f"><mark class="hl">Loopfest</mark><small>Shrewsbury, 28 Apr–2 May</small></span><span class="badge good">Good odds</span></li>
+          <li><span class="d">Rolling</span><span class="f"><mark class="hl">Dart Music</mark><small>Dartmouth, 14–16 May. Pays a fee</small></span><span class="badge good">Good odds</span></li>
           <li><span class="d">Rolling</span><span class="f">Dot to Dot<small>Bristol and Nottingham, 29–30 May</small></span><span class="badge worth">Worth a shot</span></li>
           <li><span class="d">Rolling</span><span class="f">Camper Calling<small>Warwickshire, 27–29 Aug</small></span><span class="badge worth">Worth a shot</span></li>
           <li class="closed"><span class="d">Gone</span><span class="f">Boomtown<small>Closed for 2027 in Feb 2026</small></span><span class="stamp">Closed</span></li>
@@ -342,13 +350,13 @@ footer li { margin-bottom: 4px; break-inside: avoid; }
     <h2 class="wall-h stencil" id="dates">Deadlines <span class="pink">now → spring</span></h2>
     <p class="wall-intro">Two good-odds festivals close within a month, so start this week. Yellow tickets are the urgent ones.</p>
     <ol class="tickets">
-      <li class="ticket hot"><time datetime="2026-10-09">Fri 9 Oct</time><p>Home Farm Festival opens at 4pm. The window is four weeks and may close early if they get a lot of applications.</p><span class="adm">Good odds</span></li>
-      <li class="ticket hot"><time datetime="2026-10-31">31 Oct</time><p>DonnyFest closes.</p><span class="adm">Good odds</span></li>
-      <li class="ticket"><time datetime="2026-11-01">1 Nov</time><p>FOCUS Wales closes at 6pm. It's free to apply through Amplead.</p><span class="adm">Worth a shot</span></li>
-      <li class="ticket hot"><time datetime="2026-11-06">6 Nov</time><p>Home Farm Festival closes at 4pm.</p><span class="adm">Good odds</span></li>
-      <li class="ticket"><time>Before Xmas</time><p>Teddy Rocks, Loopfest, Dart, Twyfest, Wokingham, Sunshine, Dot to Dot, Camper Calling and Together Again haven't published deadlines. Most summer festivals finish booking between January and March.</p><span class="adm">Rolling</span></li>
-      <li class="ticket"><time datetime="2027-02-15">15 Feb</time><p>The Great Escape closes. If you haven't heard by 31 March, assume you weren't picked.</p><span class="adm">Long shot</span></li>
-      <li class="ticket"><time>Spring</time><p>Glastonbury's Emerging Talent Competition is expected to open, and Y Not? says its applications open nearer the festival.</p><span class="adm">Long shot</span></li>
+      <li class="ticket hot"><span class="stub" aria-hidden="true"></span><div class="tbody"><time datetime="2026-10-09">Fri 9 Oct</time><p>Home Farm Festival opens at 4pm. The window is four weeks and may close early if they get a lot of applications.</p><span class="adm">Good odds</span></div></li>
+      <li class="ticket hot"><span class="stub" aria-hidden="true"></span><div class="tbody"><time datetime="2026-10-31">31 Oct</time><p>DonnyFest closes.</p><span class="adm">Good odds</span></div></li>
+      <li class="ticket"><span class="stub" aria-hidden="true"></span><div class="tbody"><time datetime="2026-11-01">1 Nov</time><p>FOCUS Wales closes at 6pm. It's free to apply through Amplead.</p><span class="adm">Worth a shot</span></div></li>
+      <li class="ticket hot"><span class="stub" aria-hidden="true"></span><div class="tbody"><time datetime="2026-11-06">6 Nov</time><p>Home Farm Festival closes at 4pm.</p><span class="adm">Good odds</span></div></li>
+      <li class="ticket"><span class="stub" aria-hidden="true"></span><div class="tbody"><time>Before Xmas</time><p>Teddy Rocks, Loopfest, Dart, Twyfest, Wokingham, Sunshine, Dot to Dot, Camper Calling and Together Again haven't published deadlines. Most summer festivals finish booking between January and March.</p><span class="adm">Rolling</span></div></li>
+      <li class="ticket"><span class="stub" aria-hidden="true"></span><div class="tbody"><time datetime="2027-02-15">15 Feb</time><p>The Great Escape closes. If you haven't heard by 31 March, assume you weren't picked.</p><span class="adm">Long shot</span></div></li>
+      <li class="ticket"><span class="stub" aria-hidden="true"></span><div class="tbody"><time>Spring</time><p>Glastonbury's Emerging Talent Competition is expected to open, and Y Not? says its applications open nearer the festival.</p><span class="adm">Long shot</span></div></li>
     </ol>
   </section>
 
@@ -413,6 +421,10 @@ footer li { margin-bottom: 4px; break-inside: avoid; }
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js"></script>
 <script>
 const tiers = {
   good:   { title: "Good shot", note: "Community, town and smaller rock festivals that book emerging acts through an open form." },
@@ -504,14 +516,131 @@ for (const [key, meta] of Object.entries(tiers)) {
 }
 
 const buttons = document.querySelectorAll(".filters button");
+let animate = false;
+
+function applyFilter(f) {
+  const els = document.querySelectorAll(".tier");
+  const show = t => f === "all" || t.dataset.t === f;
+  if (!animate) {
+    els.forEach(t => { t.hidden = !show(t); });
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    return;
+  }
+  // Finish any sheet that hasn't been revealed yet so Flip measures it at rest
+  ScrollTrigger.getAll().forEach(st => {
+    if (String(st.vars.id || "").startsWith("tier")) { st.animation && st.animation.progress(1); st.kill(); }
+  });
+  const state = Flip.getState(els);
+  els.forEach(t => { t.hidden = !show(t); });
+  Flip.from(state, {
+    duration: .55,
+    ease: "power3.inOut",
+    absolute: true,
+    onEnter: entering => gsap.fromTo(entering, { autoAlpha: 0, y: 70 }, { autoAlpha: 1, y: 0, duration: .5, ease: "back.out(1.4)" }),
+    onLeave: leaving => gsap.to(leaving, { autoAlpha: 0, y: -40, duration: .3 }),
+    onComplete: () => ScrollTrigger.refresh()
+  });
+}
+
 buttons.forEach(b => {
   const f = b.dataset.f;
   b.querySelector(".count").textContent = f === "all" ? fests.length : fests.filter(x => x.t === f).length;
   b.addEventListener("click", () => {
     buttons.forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    document.querySelectorAll(".tier").forEach(t => { t.hidden = f !== "all" && t.dataset.t !== f; });
+    if (animate) gsap.fromTo(b, { scale: .88 }, { scale: 1, duration: .6, ease: "elastic.out(1, .35)" });
+    applyFilter(f);
   });
 });
+
+if (window.gsap) {
+  gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
+  const mm = gsap.matchMedia();
+
+  document.fonts.ready.then(() => {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      animate = true;
+
+      // Hero: the poster slaps onto the wall, gets taped, the type sprays on, the stamp hits
+      const h1 = SplitText.create(".poster h1", { type: "words,chars" });
+      const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
+      hero
+        .fromTo(".poster", { autoAlpha: 0, scale: 1.14, rotation: -7, y: -40 },
+                           { autoAlpha: 1, scale: 1, rotation: -.8, y: 0, duration: .45, ease: "power4.in" })
+        .to(".poster", { y: 4, duration: .06, yoyo: true, repeat: 1, ease: "none" })
+        .fromTo(".hero .tape", { autoAlpha: 0, scaleX: 0 },
+                               { autoAlpha: .9, scaleX: 1, duration: .22, stagger: .1, transformOrigin: "0 50%" }, "-=.05")
+        .from(".poster .kicker", { autoAlpha: 0, x: -24, duration: .3 }, "<")
+        .from(h1.chars, { autoAlpha: 0, scale: 1.7, filter: "blur(10px)", duration: .4, stagger: { each: .03, from: "random" } }, "-=.15")
+        .from(".poster .lede", { autoAlpha: 0, y: 14, duration: .35 }, "-=.25")
+        .from(".dates li", { autoAlpha: 0, x: -28, duration: .3, stagger: .05 }, "-=.2")
+        .from(".dates mark.hl", { backgroundSize: "0% 38%", duration: .3, stagger: .09, ease: "power2.inOut" }, "-=.1")
+        .fromTo(".dates .stamp", { autoAlpha: 0, scale: 3.2, rotation: -30 },
+                                 { autoAlpha: .85, scale: 1, rotation: -8, duration: .22, ease: "power4.in" }, "-=.05")
+        .to(".poster", { x: 5, duration: .045, yoyo: true, repeat: 3, ease: "none" })
+        .fromTo(".sticker", { autoAlpha: 0, scale: 0, rotation: -70 },
+                            { autoAlpha: 1, scale: 1, rotation: 9, duration: .6, ease: "back.out(2.4)" }, "-=.1");
+
+      // The sticker peels round as you scroll past the poster
+      gsap.fromTo(".sticker", { rotation: 9, y: 0 }, {
+        rotation: 38, y: 70, ease: "none", immediateRender: false,
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
+      });
+
+      // Pink flyer pastes up, then its four blocks drop in
+      const flyer = gsap.timeline({ scrollTrigger: { trigger: ".flyer", start: "top 85%", once: true } });
+      flyer
+        .from(".flyer", { autoAlpha: 0, y: 90, rotation: -5, scale: .94, transformOrigin: "50% 0", duration: .7, ease: "back.out(1.3)" })
+        .from(".expect > div", { autoAlpha: 0, y: 30, duration: .4, stagger: .1 }, "-=.3");
+
+      // Stencil headings spray on, letter by letter
+      gsap.utils.toArray(".flyer h2, .wall-h, .rider h2").forEach(h => {
+        const split = SplitText.create(h, { type: "words,chars" });
+        gsap.from(split.chars, {
+          autoAlpha: 0, scale: 1.8, filter: "blur(10px)", duration: .4, ease: "power3.out",
+          stagger: { each: .025, from: "random" },
+          scrollTrigger: { trigger: h, start: "top 88%", once: true }
+        });
+      });
+
+      // Tickets get dealt onto the wall
+      gsap.set(".ticket", { autoAlpha: 0 });
+      ScrollTrigger.batch(".ticket", {
+        start: "top 92%", once: true,
+        onEnter: els => {
+          gsap.set(els, { autoAlpha: 1 });
+          gsap.from(els, { y: -70, rotation: () => gsap.utils.random(-16, 16), duration: .6, ease: "bounce.out", stagger: .08 });
+        }
+      });
+
+      // Hover a yellow ticket and the stub tears at the perforation
+      document.querySelectorAll(".ticket.hot").forEach(t => {
+        const tear = gsap.timeline({ paused: true })
+          .to(t.querySelector(".stub"), { rotation: -26, x: -4, y: 12, duration: .4, ease: "back.out(3)" })
+          .to(t.querySelector(".tbody"), { x: 7, rotation: 1.5, duration: .3, ease: "power2.out" }, 0);
+        t.addEventListener("pointerenter", () => tear.play());
+        t.addEventListener("pointerleave", () => tear.reverse());
+      });
+
+      // Each odds sheet peels onto the wall
+      gsap.utils.toArray(".tier").forEach((el, i) => {
+        gsap.from(el, {
+          autoAlpha: 0, y: 80, rotation: i % 2 ? 4 : -4, scale: .95, transformOrigin: "50% 0",
+          duration: .65, ease: "back.out(1.3)",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true, id: "tier" + i }
+        });
+      });
+
+      // The rider pastes up and the marker ticks go on one by one
+      const ticks = gsap.utils.toArray(".check li");
+      gsap.set(ticks, { "--tick": 0 });
+      gsap.timeline({ scrollTrigger: { trigger: ".rider", start: "top 85%", once: true } })
+        .from(".rider", { autoAlpha: 0, y: 90, rotation: 4, scale: .94, transformOrigin: "50% 0", duration: .7, ease: "back.out(1.3)" })
+        .to(ticks, { "--tick": 1, duration: .35, stagger: .12, ease: "back.out(3)" }, "-=.2");
+
+      return () => { animate = false; };
+    });
+  });
+}
 </script>
 </body>
 </html>
