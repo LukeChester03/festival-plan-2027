@@ -6,6 +6,7 @@ import Strips from "./sections/Strips.jsx";
 import Expect from "./sections/Expect.jsx";
 import Countdown from "./sections/Countdown.jsx";
 import TourDates from "./sections/TourDates.jsx";
+import FestivalMap from "./sections/FestivalMap.jsx";
 import RedFlags from "./sections/RedFlags.jsx";
 import Rider from "./sections/Rider.jsx";
 import Footer from "./sections/Footer.jsx";
@@ -22,6 +23,7 @@ function Nav() {
           <li><a href="#expect">Expect</a></li>
           <li><a href="#deadlines">Deadlines</a></li>
           <li><a href="#festivals">Festivals</a></li>
+          <li><a href="#map">Map</a></li>
           <li><a href="#red-flags">Red flags</a></li>
           <li><a href="#checklist">Checklist</a></li>
         </ul>
@@ -47,6 +49,7 @@ export default function App() {
         <Expect />
         <Countdown />
         <TourDates />
+        <FestivalMap />
         <RedFlags />
         <Rider />
       </main>

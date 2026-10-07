@@ -150,7 +150,7 @@ export default function TourDates() {
       <motion.div
         className={`cursor-sticker cursor-${hoverTier || "none"}`}
         style={{ x: sx, y: sy }}
-        animate={{ scale: hoverTier ? 1 : 0, rotate: hoverTier ? -12 : -60 }}
+        animate={{ scale: hoverTier ? 1 : 0, rotate: hoverTier ? -4 : -20 }}
         transition={{ type: "spring", stiffness: 400, damping: 22 }}
         aria-hidden="true"
       >
