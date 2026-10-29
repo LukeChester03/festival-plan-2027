@@ -8,4 +8,4 @@ repo. It reads the lines below from the default branch; change them with a PR.
 - test: `npm run build`
 - setup: `npm ci`
 - graft: `graft build --no-gitignore --no-ignore`
-- preview: `npm run dev -- --port {port} --strictPort` /
+- preview: `npm run dev -- --port {port} --strictPort --host 127.0.0.1` /
